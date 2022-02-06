@@ -72,7 +72,7 @@
         </button>
         <button
           class="rounded-full border-white/70 border-2 group hover:bg-white/70"
-          @click="copy(m.src)"
+          @click="copy(encodeURI(m.src))"
           @mouseenter="active = 'copy'"
           @mouseleave="active = ''"
         >

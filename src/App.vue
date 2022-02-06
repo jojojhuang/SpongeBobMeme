@@ -47,7 +47,7 @@
         type="text"
         v-model="search"
         placeholder="搜尋..."
-        class="border rounded-xl flex-grow outline-none bg-gray-600 bg-opacity-20 border-gray-600 h-10 m-4 mr-0 text-white text-base p-2 pl-4 transition-colors ease-in-out text-gray-100 duration-200 sm:flex-grow-0 focus:bg-transparent focus:border-indigo-500 focus:ring-2 focus:ring-indigo-900"
+        class="border rounded-xl flex-grow outline-none bg-gray-600 bg-opacity-20 border-gray-600 h-10 m-4 mr-0 text-white text-base min-w-0 p-2 pl-4 transition-colors ease-in-out text-gray-100 duration-200 sm:flex-grow-0 focus:bg-transparent focus:border-indigo-500 focus:ring-2 focus:ring-indigo-900"
       />
       <button
         class="rounded-xl flex font-bold outline-none bg-gray-600 bg-opacity-20 border-1 border-gray-600 h-10 text-white px-2 items-center active:bg-transparent active:border-indigo-500 active:ring-2 active:ring-indigo-900"
@@ -66,7 +66,7 @@
             clip-rule="evenodd"
           />
         </svg>
-        <span>收藏夾</span>
+        <span class="hidden sm:inline">收藏夾</span>
       </button>
       <a
         class="flex ml-auto h-10 mr-4 text-white/20 w-10 justify-center items-center hover:text-white"
