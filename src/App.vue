@@ -1,23 +1,23 @@
 <script setup lang="ts">
   import ImageList from '@/components/ImageList.vue'
-  import { meme } from '@/type'
+  import { useLikeStore } from '@/stores/memes'
+  import type { meme } from '@/type'
   import { useFuse } from '@vueuse/integrations'
   import { computed, onMounted, ref } from 'vue'
-  import { useLikeStore } from '@/stores/memes'
 
   const store = useLikeStore()
 
   const datas = ref<meme[]>([])
 
   onMounted(async () => {
-    datas.value = await fetch(
+    const rawDatas = await fetch(
       'https://sponge-bob-meme.s3.ap-southeast-1.amazonaws.com/memes.json',
       {
         method: 'get'
       }
-    ).then((res) => {
-      return res.json()
-    })
+    )
+    const jsonDatas = await rawDatas.json()
+    datas.value = jsonDatas.sort((a: meme, b: meme) => b.id - a.id)
   })
 
   const search = ref('')
@@ -32,7 +32,7 @@
     })
     return viewLike.value
       ? res.filter((m) => {
-          return store.isLike(m.id)
+          return store.isLike(m.uid)
         })
       : res
   })

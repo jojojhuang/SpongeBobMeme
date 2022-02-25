@@ -1,6 +1,6 @@
 <script setup lang="ts">
   import Image from '@/components/Image.vue'
-  import { meme } from '@/type'
+  import type { meme } from '@/type'
   import { useIntersectionObserver } from '@vueuse/core'
   import { computed, ref } from 'vue'
 
@@ -14,7 +14,7 @@
   const targetVisable = computed(() => {
     return size.value < props.list.length
   })
-  const { stop } = useIntersectionObserver(
+  useIntersectionObserver(
     target,
     ([{ isIntersecting }]) => {
       if (isIntersecting) {
@@ -31,8 +31,8 @@
 
 <template>
   <div class="max-h-[calc(100vh-74px)] overflow-y-scroll overflow-x-hidden">
-    <ul class="flex flex-wrap gap-4 after:(content-DEFAULT min-w-[35vh] flex-grow-[999999999]) ">
-      <li v-for="m in partList" class="flex-grow h-[35vh] aspect-16/13" :key="m.id">
+    <ul class="flex flex-wrap gap-4 after:(content-DEFAULT min-w-[35vh] flex-grow-[999999999])">
+      <li v-for="m in partList" class="flex-grow h-[35vh] aspect-16/13" :key="m.uid">
         <Image :m="m" />
       </li>
     </ul>

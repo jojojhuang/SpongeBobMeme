@@ -1,8 +1,8 @@
 <script setup lang="ts">
-  import { ref, computed } from 'vue'
-  import { useClipboard, usePermission, useLocalStorage } from '@vueuse/core'
-  import type { meme, ActiveOption } from '@/type'
   import { useLikeStore } from '@/stores/memes'
+  import type { ActiveOption, meme } from '@/type'
+  import { useClipboard, usePermission } from '@vueuse/core'
+  import { computed, ref } from 'vue'
 
   const store = useLikeStore()
 
@@ -14,7 +14,7 @@
   const activeText = computed(() => {
     switch (active.value) {
       case 'like':
-        return store.isLike(props.m.id) ? '取消收藏' : '收藏'
+        return store.isLike(props.m.uid) ? '取消收藏' : '收藏'
       case 'copy':
         return '複製網址'
       case 'link':
@@ -25,11 +25,11 @@
   })
 
   const { copied, copy } = useClipboard()
-  const permissionRead = usePermission('clipboard-read')
-  const permissionWrite = usePermission('clipboard-write')
+  usePermission('clipboard-read')
+  usePermission('clipboard-write')
 
   const toggleLike = () => {
-    store.isLike(props.m.id) ? store.removeLike(props.m.id) : store.addLike(props.m.id)
+    store.isLike(props.m.uid) ? store.removeLike(props.m.uid) : store.addLike(props.m.uid)
   }
 </script>
 
@@ -58,7 +58,7 @@
           <svg
             xmlns="http://www.w3.org/2000/svg"
             class="h-12 m-1 fill-transparent stroke-white/70 w-12 group-hover:stroke-yellow-600/80"
-            :class="{ '!fill-yellow-500': store.isLike(m.id) }"
+            :class="{ '!fill-yellow-500': store.isLike(m.uid) }"
             viewBox="0 0 24 24"
             stroke="currentColor"
           >
