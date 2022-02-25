@@ -2,7 +2,7 @@
   import ImageList from '@/components/ImageList.vue'
   import { useLikeStore } from '@/stores/memes'
   import type { meme } from '@/type'
-  import { useFuse } from '@vueuse/integrations'
+  import { useFuse } from '@vueuse/integrations/useFuse'
   import { computed, onMounted, ref } from 'vue'
 
   const store = useLikeStore()
